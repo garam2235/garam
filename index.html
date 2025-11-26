@@ -66,11 +66,27 @@
 
 <section id="request">
   <h2>견적의뢰</h2>
-  <div class="grid">
-    <div class="card">펌프</div>
-    <div class="card">모터</div>
-    <div class="card">기타 장비</div>
-  </div>
+
+  <form action="https://formspree.io/f/xzzqqobe" method="POST" class="quote-form">
+    <input type="hidden" name="_subject" value="가람 홈페이지 견적문의">
+    
+    <input type="text" name="name" placeholder="업체명 / 고객명" required>
+    <input type="tel" name="phone" placeholder="연락처" required>
+    <input type="email" name="email" placeholder="이메일">
+    
+    <select name="category" required>
+      <option value="">문의 종류 선택</option>
+      <option>펌프</option>
+      <option>모터</option>
+      <option>부품</option>
+      <option>시공 / 유지보수</option>
+      <option>기타</option>
+    </select>
+
+    <textarea name="message" rows="5" placeholder="요청 사항을 입력해주세요" required></textarea>
+
+    <button type="submit">견적 요청하기</button>
+  </form>
 </section>
 
 <section id="contact">
