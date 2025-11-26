@@ -112,3 +112,34 @@ footer p { margin: 5px 0; line-height: 1.5; }
   section { padding: 50px 8%; }
   footer { padding: 30px 8%; }
 }
+.quote-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.quote-form button {
+  padding: 14px;
+  background: #003366;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.quote-form button:hover {
+  background: #005599;
+}
