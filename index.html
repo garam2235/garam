@@ -17,6 +17,7 @@
     <a href="#products">제품소개</a>
     <a href="#services">유지보수</a>
     <a href="#result">주요실적</a>
+    <a href="#result">기술항목</a>
     <a href="#request">견적의뢰</a>
     <a href="#contact">연락처</a>
   </nav>
@@ -31,38 +32,47 @@
 <section id="about">
   <h2>회사소개</h2>
   <p>
-    가람(GARAM) 주식회사는 효성펌프와 윌로펌프를 비롯한 다양한 국산 및 외산 펌프를
-납품·시공·유지보수하는 펌프 전문기업입니다. 
+    가람(GARAM) 주식회사는 효성펌프와 윌로펌프를 비롯한 다양한 국산 및 외산 펌프를 납품, 시공, 유지보수하는 펌프 전문기업입니다.
+다년간의 현장 경험과 기술력을 바탕으로 고객의 산업 현장에 최적화된 솔루션을 제공합니다.    
   </p>
 </section>
 
 <section id="products">
   <h2>제품소개</h2>
-  <div class="grid">
-    <div class="card">효성펌프</div>
-    <div class="card">윌로펌프</div>
-    <div class="card">국산 펌프</div>
-    <div class="card">외산 펌프</div>
-  </div>
-</section>
+  <div class="products">
+      <div class="card"><h3>효성펌프</h3><p>산업용, 소방용, 급·배수용 다양한 모델 공급</p></div>
+      <div class="card"><h3>윌로펌프</h3><p>산업용, 소방용, 급·배수용 다양한 모델 공급</p></div>
+      <div class="card"><h3>국산 펌프</h3><p>성능과 내구성이 검증된 주요 브랜드 취급</p></div>
+      <div class="card"><h3>외산 펌프</h3><p>Grundfos, KSB 등 글로벌 브랜드 납품</p></div>
+    </div>
+  </section>
 
 <section id="services">
   <h2>시공 및 유지보수</h2>
-  <div class="grid">
-    <div class="card">설치 및 시공</div>
-    <div class="card">정기 점검</div>
-    <div class="card">유지보수</div>
-  </div>
-</section>
+  <div class="services">
+      <div class="card"><h3>설치 및 시공</h3><p>현장 환경에 맞춘 전문 시공 서비스</p></div>
+      <div class="card"><h3>정기 점검</h3><p>예방 정비로 안정적인 시스템 운영</p></div>
+      <div class="card"><h3>유지보수</h3><p>신속한 대응과 정확한 문제 해결</p></div>
+    </div>
+  </section>
 
 <section id="result">
   <h2>주요실적</h2>
-  <div class="grid">
-    <div class="card">관공서 및 국가기관</div>
-    <div class="card">백화점 · 호텔 · 리조트</div>
-    <div class="card">아파트 및 오피스텔</div>
-  </div>
-</section>
+ <div class="result">
+      <div class="card"><h3>관공서 및 국가기관</h3><p>학교, 김포공항, LH공사, 기술연구원 등</p></div>
+      <div class="card"><h3>주요 호스피탤리티 시설</h3><p>L백화점, A프라자, 그랜드H호텔, H리조트, 동대문빌딩, </p></div>
+      <div class="card"><h3>아파트 및 오피스텔</h3></div>
+    </div>
+  </section>
+
+<section id="skill">
+    <h2>기술항목</h2>
+    <div class="skill">
+      <div class="card"><h3>펌프</h3><p>베어링 · 샤프트 등</p></div>
+      <div class="card"><h3>모터</h3><p>휀 · 베어링 · 샤프트 · 플리 등</p></div>
+      <div class="card"><h3>그외</h3><p>그 외 각종펌프 관련 주문제작 및 시공</p></div>
+    </div>
+  </section>
 
 <section id="request">
   <h2>견적의뢰</h2>
@@ -79,7 +89,7 @@
       <option>펌프</option>
       <option>모터</option>
       <option>부품</option>
-      <option>시공 / 유지보수</option>
+      <option>유지보수</option>
       <option>기타</option>
     </select>
 
@@ -108,33 +118,3 @@
 
 </body>
 </html>
-quote-form {
-  max-width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.quote-form input,
-.quote-form select,
-.quote-form textarea {
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.quote-form button {
-  padding: 14px;
-  background: #003366;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.quote-form button:hover {
-  background: #005599;
-}
