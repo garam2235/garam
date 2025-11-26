@@ -1,92 +1,114 @@
 :root {
-  --main-blue: #003366;
-  --sub-blue: #0077aa;
+  --main-blue: #003366;
+  --sub-blue: #0077aa;
 }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f9f9f9;
-  color: #222;
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
 }
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  padding: 15px 50px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 15px 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 header img { height: 60px; }
 nav { display: flex; gap: 20px; }
 nav a {
-  text-decoration: none;
-  color: var(--main-blue);
-  font-weight: 600;
-  transition: color 0.3s;
+  text-decoration: none;
+  color: var(--main-blue);
+  font-weight: 600;
+  transition: color 0.3s;
 }
 nav a:hover { color: var(--sub-blue); }
 .menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: var(--main-blue);
-  cursor: pointer;
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--main-blue);
+  cursor: pointer;
 }
+
+/* 📌 메인 이미지(main.jpg) 배경 스타일 적용 📌 */
 .hero {
-  background: linear-gradient(120deg, var(--main-blue), var(--sub-blue));
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
+    /* 이미지 경로 설정 및 텍스트 가독성을 위한 어두운 오버레이 추가 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/main.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    
+    color: white;
+    text-align: center;
+    padding: 120px 20px; /* 패딩 조정 */
+    min-height: 450px; 
+    
+    /* 내부 요소 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.hero img { height: 80px; margin-bottom: 20px; }
-.hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-.hero p { font-size: 1.2rem; line-height: 1.6; }
+/* 배경 이미지 위에 텍스트가 잘 보이도록 그림자 효과 추가 */
+.hero h1,
+.hero p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    margin: 10px 0;
+    line-height: 1.4;
+}
+.hero h1 { font-size: 2.5rem; }
+.hero p { font-size: 1.2rem; }
+/* ------------------------------------- */
+
 section { padding: 80px 15%; background: #fff; }
 section:nth-child(even) { background: #f4f7fa; }
 h2 { color: var(--main-blue); margin-bottom: 30px; font-size: 1.8rem; }
 .products, .services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
 }
 .card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 footer {
-  background: var(--main-blue);
-  color: #fff;
-  padding: 40px 15%;
-  text-align: center;
-  font-size: 0.95rem;
+  background: var(--main-blue);
+  color: #fff;
+  padding: 40px 15%;
+  text-align: center;
+  font-size: 0.95rem;
 }
 footer p { margin: 5px 0; line-height: 1.5; }
 @media (max-width: 1024px) {
-  header { padding: 15px 30px; }
-  section { padding: 60px 10%; }
+  header { padding: 15px 30px; }
+  section { padding: 60px 10%; }
 }
 @media (max-width: 768px) {
-  header { flex-wrap: wrap; justify-content: space-between; padding: 10px 20px; }
-  .menu-toggle { display: block; }
-  nav { display: none; flex-direction: column; width: 100%; text-align: center; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
-  nav.active { display: flex; }
-  nav a { margin: 10px 0; }
-  .hero { padding: 60px 10px; }
-  .hero h1 { font-size: 1.8rem; }
-  .hero p { font-size: 1rem; }
-  section { padding: 50px 8%; }
-  footer { padding: 30px 8%; }
+  header { flex-wrap: wrap; justify-content: space-between; padding: 10px 20px; }
+  .menu-toggle { display: block; }
+  nav { display: none; flex-direction: column; width: 100%; text-align: center; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+  nav.active { display: flex; }
+  nav a { margin: 10px 0; }
+  .hero { padding: 60px 10px; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero p { font-size: 1rem; }
+  section { padding: 50px 8%; }
+  footer { padding: 30px 8%; }
 }
