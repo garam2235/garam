@@ -144,3 +144,47 @@ footer p { margin: 5px 0; line-height: 1.5; }
 .quote-form button:hover {
   background: #005599;
 }
+/* =========================
+   🔧 펌프 제품군 자동 슬라이드 배너
+========================= */
+.pump-banner {
+  background: #f4f7fa;
+  overflow: hidden;
+  padding: 30px 0;
+}
+
+.pump-track {
+  width: 100%;
+  overflow: hidden;
+}
+
+.pump-list {
+  display: flex;
+  width: max-content;
+  animation: pumpSlide 25s linear infinite;
+}
+
+.pump-list span {
+  color: #c62828; /* 🔴 빨간색 */
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 25px;
+  white-space: nowrap;
+}
+
+/* 자동 슬라이드 애니메이션 */
+@keyframes pumpSlide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .pump-list span {
+    font-size: 0.95rem;
+    margin: 0 18px;
+  }
+}
