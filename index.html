@@ -125,27 +125,31 @@
 <section id="request">
   <h2>견적의뢰</h2>
 
- <form class="quote-form"
-      action="https://formspree.io/f/xyzrqapg"
-      method="POST">
+  <form class="quote-form"
+        id="quoteForm"
+        action="https://formspree.io/f/xyzrqapg"
+        method="POST">
 
-  <input type="hidden" name="_subject" value="가람 주식회사 견적 문의">
+    <input type="hidden" name="_subject" value="가람 주식회사 견적 문의">
 
-  <input type="text" name="company" placeholder="업체명 / 고객명" required>
-  <input type="tel" name="phone" placeholder="연락처" required>
-  <input type="email" name="email" placeholder="이메일" required>
+    <input type="text" name="company" placeholder="업체명 / 고객명" required>
+    <input type="tel" name="phone" placeholder="연락처" required>
+    <input type="email" name="email" placeholder="이메일" required>
 
-  <select name="type" required>
-    <option value="" disabled selected>문의 종류 선택</option>
-    <option value="펌프">펌프</option>
-    <option value="모터">모터</option>
-    <option value="기타">그 외</option>
-  </select>
+    <select name="type" required>
+      <option value="" disabled selected>문의 종류 선택</option>
+      <option value="펌프">펌프</option>
+      <option value="모터">모터</option>
+      <option value="기타">그 외</option>
+    </select>
 
-  <textarea name="message" placeholder="요청 사항을 입력해주세요" rows="5"></textarea>
+    <textarea name="message" placeholder="요청 사항을 입력해주세요" rows="5"></textarea>
 
-  <button type="submit">견적 요청하기</button>
-</form>
+    <button type="submit">견적 요청하기</button>
+  </form>
+
+  <!-- ✅ 전송 결과 메시지 -->
+  <p id="formStatus" class="form-status" style="display:none;"></p>
 </section>
 
 <section id="contact">
