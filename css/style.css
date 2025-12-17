@@ -164,15 +164,27 @@ footer p { margin: 5px 0; line-height: 1.5; }
   animation: pumpSlide 25s linear infinite;
 }
 
-.pump-list span {
-  color: #c62828; /* 🔴 빨간색 */
+/* 👉 마우스 올리면 슬라이드 정지 */
+.pump-banner:hover .pump-list {
+  animation-play-state: paused;
+}
+
+.pump-list a {
+  color: #c62828; /* 🔴 빨간 글자 */
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 25px;
   white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* 자동 슬라이드 애니메이션 */
+.pump-list a:hover {
+  color: #8e0000;
+  text-decoration: underline;
+}
+
+/* 자동 슬라이드 */
 @keyframes pumpSlide {
   from {
     transform: translateX(0);
@@ -183,7 +195,7 @@ footer p { margin: 5px 0; line-height: 1.5; }
 }
 
 @media (max-width: 768px) {
-  .pump-list span {
+  .pump-list a {
     font-size: 0.95rem;
     margin: 0 18px;
   }
