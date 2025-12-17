@@ -41,7 +41,8 @@ nav a:hover { color: var(--sub-blue); }
 /* 📌 메인 이미지(main.jpg) 배경 스타일 적용 📌 */
 .hero {
     /* 이미지 경로 설정 및 텍스트 가독성을 위한 어두운 오버레이 추가 */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/main.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('../assets/main.jpg');
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
