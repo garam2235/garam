@@ -31,6 +31,7 @@
     <a href="#skill">기술항목</a>
     <a href="#services">시공사례</a>
     <a href="#request">견적의뢰</a>
+    <a href="#library">자료실</a>
     <a href="#contact">연락처</a>
   </nav>
 </header>
@@ -181,6 +182,40 @@
   <p id="formStatus" class="form-status" style="display:none;"></p>
 </section>
 
+<section id="library">
+  <h2>자료실</h2>
+
+  <!-- 카테고리 버튼 -->
+  <div class="library-filter">
+    <button class="active" data-filter="all">전체</button>
+    <button data-filter="install">설치</button>
+    <button data-filter="maintenance">유지보수</button>
+    <button data-filter="check">점검</button>
+  </div>
+
+  <!-- 이미지 갤러리 -->
+  <div class="library-gallery">
+    <div class="item install">
+      <img src="files/pump1.jpg" alt="급수펌프 설치">
+      <p>급수펌프 설치</p>
+    </div>
+
+    <div class="item maintenance">
+      <img src="files/pump2.jpg" alt="펌프 유지보수">
+      <p>펌프 유지보수</p>
+    </div>
+
+    <div class="item check">
+      <img src="files/pump3.jpg" alt="정기 점검">
+      <p>정기 점검</p>
+    </div>
+  </div>
+</section>
+
+<!-- 라이트박스 -->
+<div class="lightbox" id="lightbox">
+  <img src="" alt="">
+</div>
 <section id="contact">
   <h2>연락처</h2>
   <p>📍 경기도 고양시 일산서구 송포로 391번길 61 라동</p>
@@ -199,6 +234,40 @@
   });
 </script>
 <script>
+/* 카테고리 필터 */
+const filterButtons = document.querySelectorAll('.library-filter button');
+const items = document.querySelectorAll('.library-gallery .item');
+
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    items.forEach(item => {
+      item.style.display =
+        filter === 'all' || item.classList.contains(filter)
+          ? 'block'
+          : 'none';
+    });
+  });
+});
+
+/* 라이트박스 */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+
+items.forEach(item => {
+  item.addEventListener('click', () => {
+    lightboxImg.src = item.querySelector('img').src;
+    lightbox.style.display = 'flex';
+  });
+});
+
+lightbox.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+</script>
   const form = document.getElementById('quoteForm');
   const status = document.getElementById('formStatus');
 
