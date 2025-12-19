@@ -267,7 +267,7 @@ items.forEach(item => {
 lightbox.addEventListener('click', () => {
   lightbox.style.display = 'none';
 });
-</script>
+<script>
   const form = document.getElementById('quoteForm');
   const status = document.getElementById('formStatus');
 
@@ -289,14 +289,16 @@ lightbox.addEventListener('click', () => {
         form.reset();
         status.style.display = 'block';
         status.style.color = '#0a7f2e';
-        status.textContent = '견적 문의가 정상적으로 접수되었습니다. 빠르게 연락드리겠습니다.';
+        status.textContent =
+          '견적 문의가 정상적으로 접수되었습니다. 빠르게 연락드리겠습니다.';
       } else {
         throw new Error('전송 실패');
       }
     } catch (error) {
       status.style.display = 'block';
       status.style.color = '#c62828';
-      status.textContent = '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      status.textContent =
+        '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
     }
   });
 </script>
