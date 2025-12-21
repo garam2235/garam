@@ -16,8 +16,9 @@
 </head>
 
 <body>
-<img src="assets/main.jpg" style="width:3px; border:3px solid red;">
 
+<!-- 테스트 이미지 (의도적으로 3px 유지) -->
+<img src="assets/main.jpg" style="width:3px; border:3px solid red;">
 
 <header>
   <img src="assets/garam_logo.png" alt="가람 주식회사 로고" class="logo">
@@ -55,17 +56,7 @@
       <a href="#products">양흡입펌프</a>
       <a href="#products">냉각탑</a>
 
-      <!-- 🔁 끊김 방지용 복제 -->
-      <a href="#products">급수펌프</a>
-      <a href="#products">다단펌프</a>
-      <a href="#products">인라인펌프</a>
-      <a href="#products">수중펌프</a>
-      <a href="#products">터빈펌프</a>
-      <a href="#products">웨스코펌프</a>
-      <a href="#products">양흡입펌프</a>
-      <a href="#products">냉각탑</a>
-
-<!-- 🔁 끊김 방지용 복제 -->
+      <!-- 끊김 방지 복제 -->
       <a href="#products">급수펌프</a>
       <a href="#products">다단펌프</a>
       <a href="#products">인라인펌프</a>
@@ -77,7 +68,6 @@
     </div>
   </div>
 </section>
-
 
 <section id="about">
   <h2>회사소개</h2>
@@ -118,7 +108,7 @@
     </div>
     <div class="card">
       <h3>주요 호스피탤리티 시설</h3>
-      <p>L백화점, A프라자, 그랜드H호텔, S호텔, H리조트, LD빌딩 등</p>
+      <p>L백화점, A프라자, 그랜드H호텔, S호텔, H리조트 등</p>
     </div>
     <div class="card">
       <h3>아파트 및 오피스텔</h3>
@@ -152,17 +142,15 @@
       <h3>설치 및 시공</h3>
       <p>현장 환경에 맞춘 전문 시공 서비스</p>
     </div>
-    </div>
+  </div>
 </section>
 
 <section id="request">
   <h2>견적의뢰</h2>
 
-  <form class="quote-form"
-        id="quoteForm"
+  <form id="quoteForm" class="quote-form"
         action="https://formspree.io/f/xyzrqapg"
         method="POST">
-
     <input type="hidden" name="_subject" value="가람 주식회사 견적 문의">
 
     <input type="text" name="company" placeholder="업체명 / 고객명" required>
@@ -177,19 +165,16 @@
       <option value="기타">그 외</option>
     </select>
 
-    <textarea name="message" placeholder="요청 사항을 입력해주세요" rows="5"></textarea>
-
+    <textarea name="message" rows="5" placeholder="요청 사항을 입력해주세요"></textarea>
     <button type="submit">견적 요청하기</button>
   </form>
 
-  <!-- ✅ 전송 결과 메시지 -->
   <p id="formStatus" class="form-status" style="display:none;"></p>
 </section>
 
 <section id="library">
   <h2>자료실</h2>
 
-  <!-- 카테고리 버튼 -->
   <div class="library-filter">
     <button class="active" data-filter="all">전체</button>
     <button data-filter="install">설치</button>
@@ -197,18 +182,15 @@
     <button data-filter="check">점검</button>
   </div>
 
-  <!-- 이미지 갤러리 -->
   <div class="library-gallery">
     <div class="item install">
       <img src="files/pump1.jpg" alt="냉각탑">
       <p>냉각탑</p>
     </div>
-
     <div class="item maintenance">
       <img src="files/pump2.jpg" alt="순환펌프">
       <p>순환펌프</p>
     </div>
-
     <div class="item check">
       <img src="files/pump3.jpg" alt="부스터펌프">
       <p>부스터펌프</p>
@@ -216,10 +198,10 @@
   </div>
 </section>
 
-<!-- 라이트박스 -->
 <div class="lightbox" id="lightbox">
   <img src="" alt="">
 </div>
+
 <section id="contact">
   <h2>연락처</h2>
   <p>📍 경기도 고양시 일산서구 송포로 391번길 61 라동</p>
@@ -232,77 +214,76 @@
   <p>© 가람 주식회사 All Rights Reserved.</p>
 </footer>
 
+<!-- JS -->
 <script>
-  document.querySelector('.menu-toggle').addEventListener('click', function () {
-    document.querySelector('nav').classList.toggle('active');
+  const menuBtn = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('header nav');
+
+  menuBtn.addEventListener('click', () => {
+    nav.classList.toggle('active');
   });
 </script>
+
 <script>
-/* 카테고리 필터 */
-const filterButtons = document.querySelectorAll('.library-filter button');
-const items = document.querySelectorAll('.library-gallery .item');
+  const filterButtons = document.querySelectorAll('.library-filter button');
+  const items = document.querySelectorAll('.library-gallery .item');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
 
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    const filter = btn.dataset.filter;
-    items.forEach(item => {
-      item.style.display =
-        filter === 'all' || item.classList.contains(filter)
-          ? 'block'
-          : 'none';
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        item.style.display =
+          filter === 'all' || item.classList.contains(filter)
+            ? 'block'
+            : 'none';
+      });
     });
   });
-});
 
-/* 라이트박스 */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = lightbox.querySelector('img');
-
-items.forEach(item => {
-  item.addEventListener('click', () => {
-    lightboxImg.src = item.querySelector('img').src;
-    lightbox.style.display = 'flex';
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      lightboxImg.src = item.querySelector('img').src;
+      lightbox.style.display = 'flex';
+    });
   });
-});
 
-lightbox.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
+  lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+</script>
+
 <script>
   const form = document.getElementById('quoteForm');
   const status = document.getElementById('formStatus');
 
-  form.addEventListener('submit', async function (e) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const formData = new FormData(form);
 
     try {
-      const response = await fetch(form.action, {
+      const res = await fetch(form.action, {
         method: form.method,
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
 
-      if (response.ok) {
+      if (res.ok) {
         form.reset();
         status.style.display = 'block';
         status.style.color = '#0a7f2e';
-        status.textContent =
-          '견적 문의가 정상적으로 접수되었습니다. 빠르게 연락드리겠습니다.';
+        status.textContent = '견적 문의가 정상적으로 접수되었습니다.';
       } else {
-        throw new Error('전송 실패');
+        throw new Error();
       }
-    } catch (error) {
+    } catch {
       status.style.display = 'block';
       status.style.color = '#c62828';
-      status.textContent =
-        '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      status.textContent = '전송 중 오류가 발생했습니다.';
     }
   });
 </script>
