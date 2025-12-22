@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>가람 주식회사 - 펌프 설치 · 유지보수 전문기업</title>
+
+  <!-- SEO -->
+  <meta name="description" content="가람 주식회사는 효성펌프, 윌로펌프 등 산업·소방·급배수용 펌프 납품, 시공, 유지보수를 전문으로 하는 펌프 전문 기업입니다.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/garam_logo.png" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- 자료실 슬라이더 CSS -->
+  <style>
+    .library-slider {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .library-viewport {
+      overflow: hidden;
+      width: 100%;
+    }
+    .library-gallery {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s ease;
+    }
+    .library-gallery .item {
+      min-width: 240px;
+      flex-shrink: 0;
+      text-align: center;
+      cursor: pointer;
+    }
+    .slide-btn {
+      border: none;
+      background: #111;
+      color: #fff;
+      font-size: 32px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.7;
+      z-index: 10;
+    }
+    .slide-btn:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 테스트 이미지 (의도적으로 3px 유지) -->
+<img src="assets/main.jpg" style="width:3px; border:3px solid red;">
+
+<header>
+  <img src="assets/garam_logo.png" alt="가람 주식회사 로고" class="logo">
+  <button class="menu-toggle" type="button">☰</button>
+  <nav>
+    <a href="#about">회사소개</a>
+    <a href="#products">제품소개</a>
+    <a href="#result">주요실적</a>
+    <a href="#skill">기술항목</a>
+    <a href="#services">시공사례</a>
+    <a href="#request">견적의뢰</a>
+    <a href="#library">자료실</a>
+    <a href="#contact">연락처</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>윤리경영을 바탕으로 정직과 신뢰를 실천하는 펌프 설치 · 유지보수 전문기업</h1>
+  <p class="slogan">Ethics · Safety · Trust</p>
+</section>
+
+<section id="library">
+  <h2>자료실</h2>
+
+  <!-- 필터 -->
+  <div class="library-filter">
+    <button class="active" data-filter="all">전체</button>
+    <button data-filter="install">설치</button>
+    <button data-filter="maintenance">유지보수</button>
+    <button data-filter="check">점검</button>
+  </div>
+
+  <!-- 슬라이더 -->
+  <div class="library-slider">
+    <button class="slide-btn prev">‹</button>
+
+    <div class="library-viewport">
+      <div class="library-gallery">
+        <div class="item install">
+          <img src="files/pump1.jpg" alt="냉각탑">
+          <p>냉각탑</p>
+        </div>
+        <div class="item maintenance">
+          <img src="files/pump2.jpg" alt="순환펌프">
+          <p>순환펌프</p>
+        </div>
+        <div class="item check">
+          <img src="files/pump3.jpg" alt="부스터펌프">
+          <p>부스터펌프</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-btn next">›</button>
+  </div>
+</section>
+
+<!-- 라이트박스 -->
+<div class="lightbox" id="lightbox">
+  <img src="" alt="">
+</div>
+
+<footer>
+  <p>© 가람 주식회사 All Rights Reserved.</p>
+</footer>
+
+<!-- ================= JS ================= -->
+
+<script>
+/* 모바일 메뉴 */
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+  document.querySelector('header nav').classList.toggle('active');
+});
+</script>
+
+<script>
+/* 자료실 필터 + 라이트박스 */
+const filterButtons = document.querySelectorAll('.library-filter button');
+const gallery = document.querySelector('.library-gallery');
+const galleryItems = document.querySelectorAll('.library-gallery .item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    galleryItems.forEach(item => {
+      item.style.display =
+        filter === 'all' || item.classList.contains(filter)
+          ? 'block'
+          : 'none';
+    });
+
+    slideIndex = 0;
+    gallery.style.transform = 'translateX(0)';
+  });
+});
+
+galleryItems.forEach(item => {
+  item.addEventListener('click', () => {
+    lightboxImg.src = item.querySelector('img').src;
+    lightbox.style.display = 'flex';
+  });
+});
+
+lightbox.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+</script>
+
+<script>
+/* 자동 슬라이드 + 버튼 병행 */
+const slideItems = document.querySelectorAll('.library-gallery .item');
+const prevBtn = document.querySelector('.slide-btn.prev');
+const nextBtn = document.querySelector('.slide-btn.next');
+const slider = document.querySelector('.library-slider');
+
+let slideIndex = 0;
+const itemWidth = 260;
+const maxIndex = slideItems.length - 1;
+let autoSlide;
+
+function moveSlide() {
+  gallery.style.transform = `translateX(-${itemWidth * slideIndex}px)`;
+}
+
+function nextSlide() {
+  slideIndex = slideIndex < maxIndex ? slideIndex + 1 : 0;
+  moveSlide();
+}
+
+function prevSlide() {
+  slideIndex = slideIndex > 0 ? slideIndex - 1 : maxIndex;
+  moveSlide();
+}
+
+function startAuto() {
+  autoSlide = setInterval(nextSlide, 3000);
+}
+
+function stopAuto() {
+  clearInterval(autoSlide);
+}
+
+nextBtn.addEventListener('click', () => {
+  stopAuto();
+  nextSlide();
+  startAuto();
+});
+
+prevBtn.addEventListener('click', () => {
+  stopAuto();
+  prevSlide();
+  startAuto();
+});
+
+slider.addEventListener('mouseenter', stopAuto);
+slider.addEventListener('mouseleave', startAuto);
+
+startAuto();
+</script>
+
+</body>
+</html>
