@@ -3,7 +3,9 @@
   --sub-blue: #0077aa;
 }
 
-/* ===== 기본 ===== */
+/* ===============================
+   기본
+================================ */
 html { scroll-behavior: smooth; }
 
 body {
@@ -13,7 +15,9 @@ body {
   color: #222;
 }
 
-/* ===== 헤더 ===== */
+/* ===============================
+   헤더
+================================ */
 header {
   display: flex;
   align-items: center;
@@ -48,7 +52,9 @@ header nav a {
   font-weight: 600;
 }
 
-/* ===== 히어로 ===== */
+/* ===============================
+   히어로
+================================ */
 .hero {
   background-image:
     linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
@@ -77,7 +83,9 @@ header nav a {
 .hero h1 { font-size: 2.5rem; }
 .hero p { font-size: 1.2rem; }
 
-/* ===== 섹션 ===== */
+/* ===============================
+   섹션
+================================ */
 section {
   padding: 80px 15%;
   background: #fff;
@@ -93,7 +101,9 @@ h2 {
   font-size: 1.8rem;
 }
 
-/* ===== 카드 ===== */
+/* ===============================
+   카드 공통
+================================ */
 .products,
 .services,
 .result,
@@ -117,7 +127,9 @@ h2 {
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-/* ===== 펌프 자동 슬라이드 ===== */
+/* ===============================
+   펌프 자동 슬라이드 배너
+================================ */
 .pump-banner {
   background: #f4f7fa;
   overflow: hidden;
@@ -148,7 +160,9 @@ h2 {
   to { transform: translateX(-50%); }
 }
 
-/* ===== 견적 폼 ===== */
+/* ===============================
+   견적 폼
+================================ */
 .quote-form {
   max-width: 500px;
   margin: 0 auto;
@@ -180,18 +194,22 @@ h2 {
   background: #005599;
 }
 
-/* ===== 자료실 필터 ===== */
+/* ===============================
+   자료실 필터
+================================ */
 .library-filter {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .library-filter button {
-  margin: 0 5px;
-  padding: 8px 14px;
+  margin: 0 6px;
+  padding: 9px 16px;
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
+  font-size: 14px;
+  border-radius: 20px;
 }
 
 .library-filter button.active {
@@ -200,62 +218,104 @@ h2 {
   border-color: #c62828;
 }
 
-/* ===== 자료실 슬라이더 ===== */
+/* ===============================
+   자료실 슬라이더
+================================ */
 .library-slider {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .library-viewport {
-  overflow: hidden;
   width: 100%;
+  overflow: hidden;
 }
 
+/* ===============================
+   자료실 갤러리
+================================ */
 .library-gallery {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   transition: transform 0.4s ease;
+  align-items: stretch;
 }
 
+/* 카드 */
 .library-gallery .item {
-  min-width: 240px;
-  flex-shrink: 0;
-  text-align: center;
+  width: 260px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-sizing: border-box;
+
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.library-gallery .item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* 이미지 */
 .library-gallery img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid #ddd;
 }
 
-/* 버튼 */
+/* 제목 */
+.library-gallery .item p {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+  word-break: keep-all;
+  min-height: 2.8em;
+}
+
+/* 슬라이드 버튼 */
 .slide-btn {
   border: none;
   background: #111;
   color: #fff;
-  font-size: 32px;
-  width: 40px;
-  height: 40px;
+  font-size: 30px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .slide-btn:hover {
   opacity: 1;
 }
 
-/* ===== 라이트박스 ===== */
+/* 교체 탭 전용 */
+.library-gallery.wrap {
+  flex-wrap: wrap;
+  justify-content: center;
+  transform: none !important;
+}
+
+/* ===============================
+   라이트박스
+================================ */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display: none;
   justify-content: center;
   align-items: center;
@@ -265,9 +325,12 @@ h2 {
 .lightbox img {
   max-width: 90%;
   max-height: 90%;
+  border-radius: 6px;
 }
 
-/* ===== 푸터 ===== */
+/* ===============================
+   푸터
+================================ */
 footer {
   background: var(--main-blue);
   color: #fff;
@@ -275,7 +338,9 @@ footer {
   text-align: center;
 }
 
-/* ===== 반응형 ===== */
+/* ===============================
+   반응형
+================================ */
 @media (max-width: 1024px) {
   section { padding: 60px 10%; }
 }
@@ -286,9 +351,7 @@ footer {
     padding: 10px 20px;
   }
 
-  .menu-toggle {
-    display: block;
-  }
+  .menu-toggle { display: block; }
 
   header nav {
     display: none;
@@ -301,9 +364,7 @@ footer {
     border-top: 1px solid #ddd;
   }
 
-  header nav.active {
-    display: flex;
-  }
+  header nav.active { display: flex; }
 
   header nav a {
     padding: 15px;
@@ -311,15 +372,11 @@ footer {
   }
 
   section { padding: 50px 8%; }
-}
 
-.library-viewport {
-  overflow: hidden;
-  width: 100%;
-}
+  .library-gallery .item {
+    width: 100%;
+    min-width: 100%;
+  }
 
-.library-gallery {
-  display: flex;
-  gap: 20px;
-  transition: transform 0.4s ease;
+  .slide-btn { display: none; }
 }
