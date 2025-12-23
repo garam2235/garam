@@ -46,24 +46,24 @@
 <section class="pump-banner">
   <div class="pump-track">
     <div class="pump-list">
-      <a href="#products">급수펌프</a>
-      <a href="#products">다단펌프</a>
-      <a href="#products">인라인펌프</a>
-      <a href="#products">수중펌프</a>
-      <a href="#products">터빈펌프</a>
-      <a href="#products">웨스코펌프</a>
-      <a href="#products">양흡입펌프</a>
-      <a href="#products">냉각탑</a>
+      <a href="#library">급수펌프</a>
+      <a href="#library">다단펌프</a>
+      <a href="#library">인라인펌프</a>
+      <a href="#library">수중펌프</a>
+      <a href="#library">터빈펌프</a>
+      <a href="#library">웨스코펌프</a>
+      <a href="#library">양흡입펌프</a>
+      <a href="#library">냉각탑</a>
 
       <!-- 끊김 방지 복제 -->
-      <a href="#products">급수펌프</a>
-      <a href="#products">다단펌프</a>
-      <a href="#products">인라인펌프</a>
-      <a href="#products">수중펌프</a>
-      <a href="#products">터빈펌프</a>
-      <a href="#products">웨스코펌프</a>
-      <a href="#products">양흡입펌프</a>
-      <a href="#products">냉각탑</a>
+      <a href="#library">급수펌프</a>
+      <a href="#library">다단펌프</a>
+      <a href="#library">인라인펌프</a>
+      <a href="#library">수중펌프</a>
+      <a href="#library">터빈펌프</a>
+      <a href="#library">웨스코펌프</a>
+      <a href="#library">양흡입펌프</a>
+      <a href="#library">냉각탑</a>
     </div>
   </div>
 </section>
@@ -165,39 +165,27 @@
 <section id="library">
   <h2>시공사례</h2>
 
-  <!-- 필터 -->
   <div class="library-filter">
-    <button class="active" data-filter="all">전체</button>
-    <button data-filter="install">설치</button>
-    <button data-filter="maintenance">유지보수</button>
-    <button data-filter="check">점검</button>
-  </div>
+  <button class="active" data-filter="all">전체</button>
+  <button data-filter="install">설치</button>
+  <button data-filter="maintenance">유지보수</button>
+  <button data-filter="check">점검</button>
+</div>
 
-  <!-- 슬라이더 -->
+
   <div class="library-slider">
     <button class="slide-btn prev">‹</button>
 
     <div class="library-viewport">
-      <div class="library-gallery">
-        <div class="item install">
-          <img src="files/pump1.jpg" alt="냉각탑">
-          <p>냉각탑</p>
-        </div>
-        <div class="item maintenance">
-          <img src="files/pump2.jpg" alt="순환펌프">
-          <p>순환펌프</p>
-        </div>
-        <div class="item check">
-          <img src="files/pump3.jpg" alt="부스터펌프">
-          <p>부스터펌프</p>
-        </div>
-      </div>
+        <div class="library-gallery" id="libraryGallery">
+  <!-- JS로 자동 생성 -->
+</div>
+
     </div>
 
     <button class="slide-btn next">›</button>
   </div>
 </section>
-
 <!-- 라이트박스 -->
 <div class="lightbox" id="lightbox">
   <img src="" alt="">
@@ -205,8 +193,8 @@
 
 <section id="contact">
   <h2>가람주식회사</h2>
-  <p>🧾 사업자등록번호 : 475-88-02990
-  <p>🏢 대표자 : 김 주 영
+  <p>🧾 사업자등록번호 : 475-88-02990</p>
+  <p>🏢 대표자 : 김 주 영</p>
   <p>📍 경기도 고양시 일산서구 송포로 391번길 61 라동</p>
   <p>☎ 031-911-2235 | 📠 031-911-2237</p>
   <p>✉ garam1265@nate.com</p>
@@ -229,94 +217,154 @@
 </script>
 
 <script>
-  /* ===== 시공사례 슬라이더 통합 ===== */
+/* ===== 시공사례 통합 스크립트 ===== */
 
-  const filterButtons = document.querySelectorAll('.library-filter button');
-  const gallery = document.querySelector('.library-gallery');
-  const items = document.querySelectorAll('.library-gallery .item');
-  const prevBtn = document.querySelector('.slide-btn.prev');
-  const nextBtn = document.querySelector('.slide-btn.next');
-  const slider = document.querySelector('.library-slider');
+function getVisibleCount() {
+  return Math.floor(
+    document.querySelector('.library-viewport').offsetWidth / itemWidth
+  );
+}
 
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
 
-  let index = 0;
-  const itemWidth = 260; // 이미지 + gap
-  let autoSlide;
+const gallery = document.getElementById('libraryGallery');
+const filterButtons = document.querySelectorAll('.library-filter button');
+const prevBtn = document.querySelector('.slide-btn.prev');
+const nextBtn = document.querySelector('.slide-btn.next');
+const slider = document.querySelector('.library-slider');
 
-  function moveSlide() {
-    gallery.style.transform = `translateX(-${itemWidth * index}px)`;
-  }
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
 
-  function nextSlide() {
-    index = index < items.length - 1 ? index + 1 : 0;
-    moveSlide();
-  }
+let items = [];
+let index = 0;
+let itemWidth = 0;
 
-  function prevSlide() {
-    index = index > 0 ? index - 1 : items.length - 1;
-    moveSlide();
-  }
+function updateItemWidth() {
+  const item = document.querySelector('.library-gallery .item');
+  if (!item) return;
 
-  function startAutoSlide() {
-    autoSlide = setInterval(nextSlide, 3000);
-  }
+  const galleryStyle = getComputedStyle(document.querySelector('.library-gallery'));
+  const gap = parseInt(galleryStyle.columnGap || galleryStyle.gap) || 20;
 
-  function stopAutoSlide() {
-    clearInterval(autoSlide);
-  }
+  itemWidth = item.offsetWidth + gap;
+}
 
-  /* ▶ 버튼 */
-  nextBtn.addEventListener('click', () => {
-    stopAutoSlide();
-    nextSlide();
-    startAutoSlide();
+window.addEventListener('resize', updateItemWidth);
+
+let autoSlide;
+
+/* ▶ 이미지 데이터 */
+const libraryImages = [
+  { file: 'install_1.jpg', type: 'install', title: '냉각탑 설치' },
+  { file: 'install_2.jpg', type: 'install', title: '사진준비중' },
+  { file: 'maintenance_1.jpg', type: 'maintenance', title: '순환펌프교체' },
+  { file: 'maintenance_2.jpg', type: 'maintenance', title: '사진준비중' },
+  { file: 'check_1.jpg', type: 'check', title: '사진준비중' },
+  { file: 'check_2.jpg', type: 'check', title: '사진준비중' }
+];
+
+/* ▶ 이미지 자동 생성 */
+libraryImages.forEach(img => {
+  const item = document.createElement('div');
+  item.className = `item ${img.type}`;
+
+  item.innerHTML = `
+    <img src="files/library/${img.file}" alt="${img.title}">
+    <p>${img.title}</p>
+  `;
+
+  item.addEventListener('click', () => {
+    lightboxImg.src = item.querySelector('img').src;
+    lightbox.style.display = 'flex';
   });
 
-  prevBtn.addEventListener('click', () => {
-    stopAutoSlide();
-    prevSlide();
-    startAutoSlide();
-  });
+  gallery.appendChild(item);
+});
 
-  /* ▶ 마우스 올리면 멈춤 */
-  slider.addEventListener('mouseenter', stopAutoSlide);
-  slider.addEventListener('mouseleave', startAutoSlide);
+items = document.querySelectorAll('.library-gallery .item');
 
-  /* ▶ 필터 */
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+updateItemWidth();
 
-      const filter = btn.dataset.filter;
-      items.forEach(item => {
-        item.style.display =
-          filter === 'all' || item.classList.contains(filter)
-            ? 'block'
-            : 'none';
-      });
+/* ▶ 슬라이드 */
+function moveSlide() {
+  gallery.style.transform = `translateX(-${itemWidth * index}px)`;
+}
 
-      index = 0;
-      moveSlide();
-    });
-  });
+function nextSlide() {
+  const visibleCount = getVisibleCount();
+  const maxIndex = Math.max(0, items.length - visibleCount);
 
-  /* ▶ 라이트박스 */
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      lightboxImg.src = item.querySelector('img').src;
-      lightbox.style.display = 'flex';
-    });
-  });
+  index = index < maxIndex ? index + 1 : 0;
+  moveSlide();
+}
 
-  lightbox.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-  });
 
+function prevSlide() {
+  const visibleCount = getVisibleCount();
+  const maxIndex = Math.max(0, items.length - visibleCount);
+
+  index = index > 0 ? index - 1 : maxIndex;
+  moveSlide();
+}
+
+
+function startAutoSlide() {
+  autoSlide = setInterval(nextSlide, 3000);
+}
+
+function stopAutoSlide() {
+  clearInterval(autoSlide);
+}
+
+/* ▶ 버튼 */
+nextBtn.onclick = () => {
+  stopAutoSlide();
+  nextSlide();
   startAutoSlide();
+};
+
+prevBtn.onclick = () => {
+  stopAutoSlide();
+  prevSlide();
+  startAutoSlide();
+};
+
+slider.onmouseenter = stopAutoSlide;
+slider.onmouseleave = startAutoSlide;
+
+/* ▶ 필터 */
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+
+    items.forEach(item => {
+      item.style.display =
+        filter === 'all' || item.classList.contains(filter)
+          ? 'block'
+          : 'none';
+    });
+
+    // ⭐ 핵심 추가
+    items = Array.from(
+      document.querySelectorAll('.library-gallery .item')
+    ).filter(item => item.style.display !== 'none');
+
+    index = 0;
+    moveSlide();
+  });
+});
+
+/* ▶ 라이트박스 닫기 */
+lightbox.onclick = () => {
+  lightbox.style.display = 'none';
+};
+
+startAutoSlide();
 </script>
+
 
 
 <script>
