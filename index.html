@@ -168,7 +168,7 @@
   <div class="library-filter">
   <button class="active" data-filter="all">전체</button>
   <button data-filter="install">신규설치</button>
-  <button data-filter="maintenance">교체</button>
+  <button data-filter="change">교체</button>
   <button data-filter="check">기타</button>
 </div>
 
@@ -217,14 +217,9 @@
 </script>
 
 <script>
-/* ===== 시공사례 통합 스크립트 ===== */
-
-function getVisibleCount() {
-  return Math.floor(
-    document.querySelector('.library-viewport').offsetWidth / itemWidth
-  );
-}
-
+/* ===============================
+   시공사례 슬라이더 (무한루프 안정판)
+   =============================== */
 
 const gallery = document.getElementById('libraryGallery');
 const filterButtons = document.querySelectorAll('.library-filter button');
@@ -238,80 +233,119 @@ const lightboxImg = lightbox.querySelector('img');
 let items = [];
 let index = 0;
 let itemWidth = 0;
-
-function updateItemWidth() {
-  const item = document.querySelector('.library-gallery .item');
-  if (!item) return;
-
-  const galleryStyle = getComputedStyle(document.querySelector('.library-gallery'));
-  const gap = parseInt(galleryStyle.columnGap || galleryStyle.gap) || 20;
-
-  itemWidth = item.offsetWidth + gap;
-}
-
-window.addEventListener('resize', updateItemWidth);
-
 let autoSlide;
 
 /* ▶ 이미지 데이터 */
 const libraryImages = [
   { file: 'install_1.jpg', type: 'install', title: '사진준비중' },
-  { file: 'install_2.jpg', type: 'install', title: '사진준비중' },
-  { file: 'maintenance_1.jpg', type: 'maintenance', title: '냉각탑 오버홀' },
-  { file: 'maintenance_2.jpg', type: 'maintenance', title: '배기휀 베어링 교체' },
-  { file: 'maintenance_3.jpg', type: 'maintenance', title: '순환펌프 교체' },
-  { file: 'maintenance_4.jpg', type: 'maintenance', title: '양흡입' },
-  { file: 'check_1.jpg', type: 'check', title: '사진준비중' },
-  { file: 'check_2.jpg', type: 'check', title: '사진준비중' }
+  { file: 'change_1.jpg', type: 'change', title: '냉각탑 오버홀' },
+  { file: 'change_2.jpg', type: 'change', title: '배기휀 베어링 교체' },
+  { file: 'change_3.jpg', type: 'change', title: '순환펌프 교체' },
+  { file: 'change_4.jpg', type: 'change', title: '양흡입펌프' },
+  { file: 'check_1.jpg', type: 'check', title: '사진준비중' }
 ];
 
-/* ▶ 이미지 자동 생성 */
+/* ▶ 이미지 생성 */
 libraryImages.forEach(img => {
   const item = document.createElement('div');
   item.className = `item ${img.type}`;
-
   item.innerHTML = `
-    <img src="files/library/${img.file}" alt="${img.title}">
+    <img src="files/library/${img.file}" alt="가람 주식회사 ${img.title}">
     <p>${img.title}</p>
   `;
-
-  item.addEventListener('click', () => {
+  item.onclick = () => {
     lightboxImg.src = item.querySelector('img').src;
     lightbox.style.display = 'flex';
-  });
-
+  };
   gallery.appendChild(item);
 });
 
-items = document.querySelectorAll('.library-gallery .item');
+/* ▶ 기본 계산 */
+function updateItemWidth() {
+  const item = gallery.querySelector('.item');
+  if (!item) return;
+  const style = getComputedStyle(gallery);
+  const gap = parseInt(style.gap || style.columnGap) || 20;
+  itemWidth = item.offsetWidth + gap;
+}
 
-updateItemWidth();
+function getVisibleCount() {
+  if (document.querySelector('.library-filter .active')?.dataset.filter === 'change') {
+    return 1;
+  }
+  return Math.floor(
+    document.querySelector('.library-viewport').offsetWidth / itemWidth
+  );
+}
 
-/* ▶ 슬라이드 */
+function canSlide() {
+  return items.length > 1;
+}
+
+/* ▶ 무한루프용 복제 */
+function cloneItems() {
+  if (!canSlide()) return;
+  const visible = getVisibleCount();
+  items.slice(0, visible).forEach(item => {
+    const clone = item.cloneNode(true);
+    clone.classList.add('clone');
+    gallery.appendChild(clone);
+  });
+}
+
+/* ▶ 슬라이드 이동 */
 function moveSlide() {
-  gallery.style.transform = `translateX(-${itemWidth * index}px)`;
+  gallery.style.transform = `translateX(-${index * itemWidth}px)`;
 }
 
+/* ▶ 다음 */
 function nextSlide() {
-  const visibleCount = getVisibleCount();
-  const maxIndex = Math.max(0, items.length - visibleCount);
+  if (!canSlide()) return;
 
-  index = index < maxIndex ? index + 1 : 0;
+  index++;
+  gallery.style.transition =
+    'transform 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
   moveSlide();
+
+  const maxIndex = items.length;
+
+  if (index >= maxIndex) {
+    setTimeout(() => {
+      gallery.style.transition = 'none';
+      index = 0;
+      moveSlide();
+    }, 1000);
+  }
 }
 
-
+/* ▶ 이전 */
 function prevSlide() {
-  const visibleCount = getVisibleCount();
-  const maxIndex = Math.max(0, items.length - visibleCount);
+  if (!canSlide()) return;
 
-  index = index > 0 ? index - 1 : maxIndex;
-  moveSlide();
+  if (index <= 0) {
+    gallery.style.transition = 'none';
+    index = items.length - getVisibleCount();
+    moveSlide();
+
+    requestAnimationFrame(() => {
+      gallery.style.transition =
+        'transform 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
+      index--;
+      moveSlide();
+    });
+  } else {
+    index--;
+    gallery.style.transition =
+      'transform 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    moveSlide();
+  }
 }
 
-
+/* ▶ 자동 슬라이드 */
 function startAutoSlide() {
-  autoSlide = setInterval(nextSlide, 3000);
+  stopAutoSlide();
+  if (!canSlide()) return;
+  autoSlide = setInterval(nextSlide, 5500);
 }
 
 function stopAutoSlide() {
@@ -336,37 +370,50 @@ slider.onmouseleave = startAutoSlide;
 
 /* ▶ 필터 */
 filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
+  btn.onclick = () => {
     filterButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     const filter = btn.dataset.filter;
 
-    items.forEach(item => {
+    gallery.querySelectorAll('.clone').forEach(c => c.remove());
+
+    gallery.querySelectorAll('.item:not(.clone)').forEach(item => {
       item.style.display =
         filter === 'all' || item.classList.contains(filter)
-          ? 'block'
+          ? 'flex'
           : 'none';
     });
 
-    // ⭐ 핵심 추가
     items = Array.from(
-      document.querySelectorAll('.library-gallery .item')
+      gallery.querySelectorAll('.item:not(.clone)')
     ).filter(item => item.style.display !== 'none');
 
     index = 0;
-    moveSlide();
-  });
+    gallery.style.transition = 'none';
+    gallery.style.transform = 'translateX(0)';
+
+    updateItemWidth();
+    cloneItems();
+    startAutoSlide();
+  };
 });
 
-/* ▶ 라이트박스 닫기 */
+/* ▶ 라이트박스 */
 lightbox.onclick = () => {
   lightbox.style.display = 'none';
 };
 
+/* ▶ 초기 실행 */
+items = Array.from(gallery.querySelectorAll('.item'));
+updateItemWidth();
+cloneItems();
 startAutoSlide();
-</script>
 
+window.addEventListener('resize', () => {
+  updateItemWidth();
+});
+</script>
 
 
 <script>
