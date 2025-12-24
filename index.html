@@ -192,10 +192,10 @@
 </div>
 
 <section id="contact">
-  <h2>가람주식회사</h2>
+  <h2>가람 주식회사</h2>
   <p>🧾 사업자등록번호 : 475-88-02990</p>
   <p>🏢 대표자 : 김 주 영</p>
-  <p>📍 경기도 고양시 일산서구 송포로 391번길 61 라동</p>
+  <p>📍 경기도 고양시 일산서구 송포로 391번길 61. 라동</p>
   <p>☎ 031-911-2235 | 📠 031-911-2237</p>
   <p>✉ garam1265@nate.com</p>
   <p>🌐 www.garam1265.co.kr</p>
@@ -224,12 +224,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.querySelector(".slide-btn.next");
   const filterBtns = document.querySelectorAll(".library-filter button");
 
-  let index = 0;
-  const itemWidth = 260 + 24; // 카드 + gap
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = lightbox.querySelector("img");
 
-  /* ===============================
-     📸 이미지 데이터
-  =============================== */
+  let index = 0;
+  const itemWidth = 260 + 24;
+
+  /* 📸 이미지 데이터 */
   const images = [
     { file: "install_1.jpg", type: "install", title: "사진준비중" },
     { file: "change_1.jpg", type: "change", title: "냉각탑 오버홀" },
@@ -239,9 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { file: "check_1.jpg", type: "check", title: "사진준비중" }
   ];
 
-  /* ===============================
-     📸 이미지 생성
-  =============================== */
+  /* 📸 이미지 생성 */
   images.forEach(img => {
     const item = document.createElement("div");
     item.className = `item ${img.type}`;
@@ -272,20 +271,10 @@ document.addEventListener("DOMContentLoaded", () => {
     index = 0;
     gallery.classList.remove("wrap");
     gallery.style.transform = "translateX(0)";
-    prevBtn.style.display = "";
-    nextBtn.style.display = "";
   }
 
-  /* ▶ 버튼 */
-  prevBtn.onclick = () => {
-    index--;
-    updateSlider();
-  };
-
-  nextBtn.onclick = () => {
-    index++;
-    updateSlider();
-  };
+  prevBtn.onclick = () => { index--; updateSlider(); };
+  nextBtn.onclick = () => { index++; updateSlider(); };
 
   /* ▶ 필터 */
   filterBtns.forEach(btn => {
@@ -294,7 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.add("active");
 
       const filter = btn.dataset.filter;
-
       gallery.querySelectorAll(".item").forEach(item => {
         item.style.display =
           filter === "all" || item.classList.contains(filter)
@@ -302,25 +290,39 @@ document.addEventListener("DOMContentLoaded", () => {
             : "none";
       });
 
-      if (filter === "change") {
-        gallery.classList.add("wrap");
-        gallery.style.transform = "none";
-        prevBtn.style.display = "none";
-        nextBtn.style.display = "none";
-      } else {
-        resetSlider();
-        updateSlider();
-      }
+      resetSlider();
+      updateSlider();
     };
   });
 
-  /* ▶ 최초 실행 */
-  resetSlider();
-  updateSlider();
+  /* 🔍 라이트박스 */
+  gallery.addEventListener("click", (e) => {
+    if (e.target.tagName === "IMG") {
+      lightboxImg.src = e.target.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
 
   window.addEventListener("resize", updateSlider);
+
+  updateSlider();
 });
 </script>
+
 
 <script>
 /* 견적문의 */
