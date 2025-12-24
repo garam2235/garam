@@ -195,7 +195,7 @@
   <h2>가람 주식회사</h2>
   <p>🧾 사업자등록번호 : 475-88-02990</p>
   <p>🏢 대표자 : 김 주 영</p>
-  <p>📍 경기도 고양시 일산서구 송포로 391번길 61. 라동</p>
+  <p>📍 경기도 고양시 일산서구 송포로 391번길 61, 라동</p>
   <p>☎ 031-911-2235 | 📠 031-911-2237</p>
   <p>✉ garam1265@nate.com</p>
   <p>🌐 www.garam1265.co.kr</p>
@@ -297,12 +297,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* 🔍 라이트박스 */
   gallery.addEventListener("click", (e) => {
-    if (e.target.tagName === "IMG") {
-      lightboxImg.src = e.target.src;
-      lightbox.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-  });
+  const item = e.target.closest(".item");
+  if (!item) return;
+
+  const img = item.querySelector("img");
+  if (!img) return;
+
+  lightboxImg.src = img.src;
+  lightbox.style.display = "flex";
+  document.body.style.overflow = "hidden";
+});
 
   lightbox.addEventListener("click", () => {
     lightbox.style.display = "none";
@@ -355,6 +359,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 </script>
+
+<script>
+/* 이미지 보호 */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
 
 </body>
 </html>
