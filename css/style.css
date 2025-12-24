@@ -326,7 +326,12 @@ h2 {
   max-height: 90%;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+  /* 저장/선택 방지 */
+  pointer-events: none;
+  user-select: none;
 }
+
 
 /* ===============================
    푸터
@@ -379,4 +384,90 @@ footer {
   }
 
   .slide-btn { display: none; }
+}
+/* =========================
+   시공사례 이미지 보호
+========================= */
+
+/* 기본 이미지 보호 */
+.library-gallery img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 이미지 카드 */
+.library-gallery .item {
+  position: relative;
+  flex-direction: column;
+}
+
+/* 투명 오버레이 (클릭 차단) */
+.library-gallery .item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* 워터마크 자동 삽입 */
+.library-gallery .item::before {
+  content: "© GARAM CO., LTD.";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 4;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   시공사례 이미지 보호
+========================= */
+
+/* 기본 이미지 보호 */
+.library-gallery img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 이미지 카드 */
+.library-gallery .item {
+  position: relative;
+  flex-direction: column;
+}
+
+/* 투명 오버레이 (클릭 차단) */
+.library-gallery .item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* 워터마크 자동 삽입 */
+.library-gallery .item::before {
+  content: "© GARAM CO., LTD.";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 4;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+/* 모바일 저장 메뉴 차단 */
+body {
+  -webkit-touch-callout: none;
 }
