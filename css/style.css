@@ -332,6 +332,16 @@ h2 {
   user-select: none;
 }
 
+.lightbox::after {
+  content: "© GARAM CO., LTD.";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
 
 /* ===============================
    푸터
@@ -385,24 +395,25 @@ footer {
 
   .slide-btn { display: none; }
 }
-/* =========================
-   시공사례 이미지 보호
-========================= */
+/* =================================================
+   시공사례 이미지 보호 & 워터마크 (EDITABLE)
+   👉 이 블록은 CSS 맨 아래에 위치
+================================================= */
 
-/* 기본 이미지 보호 */
+/* 🔒 이미지 저장/드래그 차단 */
 .library-gallery img {
   -webkit-user-drag: none;
   user-select: none;
   pointer-events: none;
 }
 
-/* 이미지 카드 */
+/* 📦 카드 기준 */
 .library-gallery .item {
   position: relative;
-  flex-direction: column;
+  overflow: hidden;
 }
 
-/* 투명 오버레이 (클릭 차단) */
+/* 🧱 클릭 차단용 투명 오버레이 */
 .library-gallery .item::after {
   content: "";
   position: absolute;
@@ -410,64 +421,35 @@ footer {
   z-index: 3;
 }
 
-/* 워터마크 자동 삽입 */
+/* 🏷 워터마크 */
 .library-gallery .item::before {
+  /* 🔧 워터마크 문구 */
   content: "© GARAM CO., LTD.";
+
   position: absolute;
+
+  /* 🔧 위치 조절 */
   bottom: 10px;
   right: 10px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(0, 0, 0, 0.35);
+  /* top / left 로 바꿔도 됨 */
+
+  /* 🔧 글자 스타일 */
+  font-size: 12px;           /* 크기 */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.75);
+
+  /* 🔧 배경 스타일 */
+  background: rgba(0, 0, 0, 0.45);
   padding: 4px 8px;
   border-radius: 4px;
-  z-index: 4;
+
+  z-index: 5;                /* 오버레이보다 위 */
   pointer-events: none;
-  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
-/* =========================
-   시공사례 이미지 보호
-========================= */
-
-/* 기본 이미지 보호 */
-.library-gallery img {
-  -webkit-user-drag: none;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* 이미지 카드 */
-.library-gallery .item {
-  position: relative;
-  flex-direction: column;
-}
-
-/* 투명 오버레이 (클릭 차단) */
-.library-gallery .item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-}
-
-/* 워터마크 자동 삽입 */
-.library-gallery .item::before {
-  content: "© GARAM CO., LTD.";
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(0, 0, 0, 0.35);
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 4;
-  pointer-events: none;
-  letter-spacing: 0.5px;
-}
-
-/* 모바일 저장 메뉴 차단 */
+/* 📱 모바일 이미지 저장 메뉴 억제 (iOS) */
 body {
   -webkit-touch-callout: none;
 }
