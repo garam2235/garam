@@ -13,6 +13,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: #f9f9f9;
   color: #222;
+  -webkit-touch-callout: none;
 }
 
 /* ===============================
@@ -36,9 +37,10 @@ header img { height: 60px; }
   display: none;
   background: none;
   border: none;
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
   color: var(--main-blue);
+  z-index: 2001;
 }
 
 header nav {
@@ -74,14 +76,14 @@ header nav a {
   align-items: center;
 }
 
+.hero h1 { font-size: 2.5rem; }
+.hero p { font-size: 1.2rem; }
+
 .hero h1,
 .hero p {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
   margin: 10px 0;
 }
-
-.hero h1 { font-size: 2.5rem; }
-.hero p { font-size: 1.2rem; }
 
 /* ===============================
    섹션
@@ -105,7 +107,6 @@ h2 {
    카드 공통
 ================================ */
 .products,
-.services,
 .result,
 .skill {
   display: grid;
@@ -119,12 +120,6 @@ h2 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 /* ===============================
@@ -190,12 +185,8 @@ h2 {
   cursor: pointer;
 }
 
-.quote-form button:hover {
-  background: #005599;
-}
-
 /* ===============================
-   자료실 필터
+   시공사례 필터
 ================================ */
 .library-filter {
   text-align: center;
@@ -219,7 +210,7 @@ h2 {
 }
 
 /* ===============================
-   자료실 슬라이더
+   시공사례 슬라이더
 ================================ */
 .library-slider {
   position: relative;
@@ -231,80 +222,54 @@ h2 {
 .library-viewport {
   width: 100%;
   overflow: hidden;
+  min-height: 300px;
 }
 
-/* ===============================
-   자료실 갤러리
-================================ */
 .library-gallery {
   display: flex;
   gap: 24px;
   transition: transform 0.3s ease;
 }
 
-/* 카드 */
 .library-gallery .item {
   width: 260px;
   min-width: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   background: #fff;
   border-radius: 14px;
   padding: 14px;
-  box-sizing: border-box;
-
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
 }
 
-.library-gallery .item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-/* 이미지 */
 .library-gallery img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 6px;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* 제목 */
 .library-gallery .item p {
   margin-top: 12px;
   font-size: 15px;
-  line-height: 1.4;
   text-align: center;
-  word-break: keep-all;
   min-height: 2.8em;
 }
 
-/* 슬라이드 버튼 */
-.slide-btn {
-  border: none;
-  background: #111;
-  color: #fff;
-  font-size: 30px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0.75;
-}
-
-.slide-btn:hover {
-  opacity: 1;
-}
-
-/* 교체 탭 전용 */
-.library-gallery.wrap {
-  flex-wrap: wrap;
-  justify-content: center;
-  transform: none !important;
+/* 워터마크 */
+.library-gallery .item::before {
+  content: "© GARAM CO., LTD.";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  background: rgba(0,0,0,0.45);
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
 }
 
 /* ===============================
@@ -318,30 +283,7 @@ h2 {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  cursor: pointer;
 }
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-
-  /* 저장/선택 방지 */
-  pointer-events: none;
-  user-select: none;
-}
-
-.lightbox::after {
-  content: "© GARAM CO., LTD.";
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  color: rgba(255,255,255,0.5);
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
 
 /* ===============================
    푸터
@@ -354,121 +296,23 @@ footer {
 }
 
 /* ===============================
-   반응형
+   반응형 (모바일)
 ================================ */
-@media (max-width: 1024px) {
-  section { padding: 60px 10%; }
-}
-
-@media (max-width: 768px) {
-  header {
-    flex-wrap: wrap;
-    padding: 10px 20px;
-  }
-
-  .menu-toggle { display: block; }
-
-  header nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    flex-direction: column;
-    border-top: 1px solid #ddd;
-  }
-
-  header nav.active { display: flex; }
-
-  header nav a {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-  }
-
-  section { padding: 50px 8%; }
-
-  .library-gallery .item {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .slide-btn { display: none; }
-}
-/* =================================================
-   시공사례 이미지 보호 & 워터마크 (EDITABLE)
-   👉 이 블록은 CSS 맨 아래에 위치
-================================================= */
-
-/* 🔒 이미지 저장/드래그 차단 */
-.library-gallery img {
-  -webkit-user-drag: none;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* 📦 카드 기준 */
-.library-gallery .item {
-  position: relative;
-  overflow: hidden;
-}
-
-/* 🧱 클릭 차단용 투명 오버레이 */
-.library-gallery .item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-}
-
-/* 🏷 워터마크 */
-.library-gallery .item::before {
-  /* 🔧 워터마크 문구 */
-  content: "© GARAM CO., LTD.";
-
-  position: absolute;
-
-  /* 🔧 위치 조절 */
-  bottom: 10px;
-  right: 10px;
-  /* top / left 로 바꿔도 됨 */
-
-  /* 🔧 글자 스타일 */
-  font-size: 12px;           /* 크기 */
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.75);
-
-  /* 🔧 배경 스타일 */
-  background: rgba(0, 0, 0, 0.45);
-  padding: 4px 8px;
-  border-radius: 4px;
-
-  z-index: 5;                /* 오버레이보다 위 */
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-/* 📱 모바일 이미지 저장 메뉴 억제 (iOS) */
-body {
-  -webkit-touch-callout: none;
-}
-
-/* =========================
-   모바일 메뉴 겹침 처리
-========================= */
 @media (max-width: 768px) {
 
   header {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2000;
+    padding: 10px 20px;
   }
 
   body {
-    padding-top: 70px; /* header 실제 높이에 맞게 */
+    padding-top: 70px;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   header nav {
@@ -479,11 +323,25 @@ body {
     max-height: 0;
     overflow: hidden;
     background: #fff;
+    flex-direction: column;
     transition: max-height 0.3s ease;
   }
 
   header nav.active {
-    max-height: 300px; /* 메뉴 열렸을 때 높이 */
+    max-height: 320px;
+  }
+
+  header nav a {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  section {
+    padding: 50px 8%;
+  }
+
+  .library-gallery .item {
+    width: 100%;
+    min-width: 100%;
   }
 }
-
