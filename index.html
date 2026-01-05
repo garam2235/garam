@@ -335,6 +335,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+/* =========================
+   모바일 스와이프 슬라이드
+========================= */
+let startX = 0;
+let endX = 0;
+let isSwiping = false;
+
+const viewport = document.querySelector('.library-viewport');
+
+if (viewport) {
+  viewport.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  }, { passive: true });
+
+  viewport.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+
+    const diff = startX - endX;
+
+    /* 스와이프 최소 거리 */
+    if (Math.abs(diff) < 40) return;
+
+    if (diff > 0) {
+      // 👉 왼쪽으로 스와이프 (다음)
+      index++;
+    } else {
+      // 👉 오른쪽으로 스와이프 (이전)
+      index--;
+    }
+
+    updateSlider();
+  });
+}
+</script>
+
 
 <script>
 /* 견적문의 */
