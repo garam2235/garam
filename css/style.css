@@ -53,6 +53,7 @@ header nav a {
   text-decoration: none;
   color: var(--main-blue);
   font-weight: 600;
+  white-space: nowrap; /* 단어가 줄바꿈되지 않도록 설정 */
 }
 
 /* ===============================
@@ -366,4 +367,71 @@ h2 {
   margin: 0 !important;
   line-height: 1.25 !important; /* 줄간격을 촘촘하게 설정 */
   font-size: 0.92rem;
+}
+
+/* ===============================
+   상단 헤더 메뉴 간격 완벽 균일화
+================================ */
+header nav {
+  display: flex !important;
+  justify-content: flex-end !important; /* 메뉴들을 오른쪽으로 모음 */
+  align-items: center !important;
+  gap: 28px !important; /* 모든 메뉴 간 간격을 정확히 28px로 동일하게 고정 */
+}
+
+header nav a {
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important; /* 메뉴 상자가 제각각 넓어지는 현상 방지 */
+  width: auto !important;
+  text-decoration: none;
+  color: var(--main-blue);
+  font-weight: 600;
+  white-space: nowrap; /* 글자 줄바꿈 방지 */
+}
+
+/* ===============================
+   펌프 배너 무한 애니메이션
+================================ */
+.pump-banner {
+  width: 100%;
+  overflow: hidden;
+  background: #f4f7fa;
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.pump-track {
+  display: flex;
+  width: max-content;
+}
+
+.pump-list {
+  display: flex;
+  gap: 30px;
+  animation: rollBanner 25s linear infinite; /* 25초 동안 무한 반복 흐름 */
+}
+
+.pump-list a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.pump-list a:hover {
+  color: var(--main-blue);
+}
+
+/* 🔄 흘러가는 애니메이션 키프레임 */
+@keyframes rollBanner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* 정확히 절반 위치까지 자연스럽게 이동 */
+  }
 }

@@ -26,13 +26,13 @@
   <button class="menu-toggle" type="button" aria-label="메뉴 열기">☰</button>
 
   <nav aria-label="주요 메뉴">
-    <a href="#about">회사소개</a>
-    <a href="#products">제품소개</a>
-    <a href="#result">주요실적</a>
-    <a href="#skill">기술항목</a>   
-    <a href="#request">견적의뢰</a>
-    <a href="#library">시공사례</a>
-    <a href="#contact">연락처</a>
+  <a href="#library">시공사례</a>
+  <a href="#about">회사소개</a>
+  <a href="#products">제품소개</a>
+  <a href="#result">주요실적</a>
+  <a href="#skill">기술항목</a>
+  <a href="#request">견적의뢰</a>
+  <a href="#contact">연락처</a>
   </nav>
 </header>
 
@@ -65,6 +65,31 @@
       <a href="#library">양흡입펌프</a>
       <a href="#library">냉각탑</a>
     </div>
+  </div>
+</section>
+
+<section id="library">
+  <h2>시공사례</h2>
+
+  <div class="library-filter">
+  <button class="active" data-filter="all">전체</button>
+  <button data-filter="install">신규설치</button>
+  <button data-filter="change">교체</button>
+  <button data-filter="check">기타</button>
+</div>
+
+
+  <div class="library-slider">
+    <button class="slide-btn prev">‹</button>
+
+    <div class="library-viewport">
+        <div class="library-gallery" id="libraryGallery">
+  <!-- JS로 자동 생성 -->
+</div>
+
+    </div>
+
+    <button class="slide-btn next">›</button>
   </div>
 </section>
 
@@ -162,30 +187,6 @@
   <p id="formStatus" class="form-status" style="display:none;"></p>
 </section>
 
-<section id="library">
-  <h2>시공사례</h2>
-
-  <div class="library-filter">
-  <button class="active" data-filter="all">전체</button>
-  <button data-filter="install">신규설치</button>
-  <button data-filter="change">교체</button>
-  <button data-filter="check">기타</button>
-</div>
-
-
-  <div class="library-slider">
-    <button class="slide-btn prev">‹</button>
-
-    <div class="library-viewport">
-        <div class="library-gallery" id="libraryGallery">
-  <!-- JS로 자동 생성 -->
-</div>
-
-    </div>
-
-    <button class="slide-btn next">›</button>
-  </div>
-</section>
 <!-- 라이트박스 -->
 <div class="lightbox" id="lightbox">
   <img src="" alt="">
