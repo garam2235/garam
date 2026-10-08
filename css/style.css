@@ -337,3 +337,33 @@ h2 {
   .slide-btn.prev { left: 5px; }
   .slide-btn.next { right: 5px; }
 }
+
+/* ===============================
+   제품소개 / 주요실적 / 기술항목 간격 50% 축소
+================================ */
+
+/* 1. 카드 상자 내부 안쪽 여백 절반(50%) 축소 */
+#products .card,
+#result .card,
+#skill .card {
+  padding: 12px 16px !important; /* 기존 약 25~30px -> 12px로 절반 감소 */
+  margin-bottom: 12px !important; /* 카드 간 세로 여백 절반 감소 */
+}
+
+/* 2. 카드 제목(h3) 위아래 여백 절반 축소 */
+#products .card h3,
+#result .card h3,
+#skill .card h3 {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important; /* 제목과 본문 사이 간격 축소 */
+  font-size: 1.1rem;
+}
+
+/* 3. 본문 텍스트(p) 줄간격 및 여백 축소 */
+#products .card p,
+#result .card p,
+#skill .card p {
+  margin: 0 !important;
+  line-height: 1.25 !important; /* 줄간격을 촘촘하게 설정 */
+  font-size: 0.92rem;
+}
